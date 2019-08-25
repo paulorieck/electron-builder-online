@@ -32,35 +32,46 @@ function main() {
 
     // Subscribe to websocket
     var ws = new WebSocket('ws://187.85.174.221:8080/');
-            
-    ws.on('open', function open() {
-        console.log('WebSocket connection opened.');
-        ws.send(JSON.stringify({'op': 'subscribe', 'parameters': parameters}));
-    });
+
+    var package = JSON.parse(fs.readFileSync("package.json"));
+
+    if ( package.repository.type === "git" && typeof package.repository.url !== "undefined" && package.repository.url !== null && package.repository.url !== "" ) {
+
+        ws.on('open', function open() {
+            console.log('WebSocket connection opened.');
+            parameters = parameters.concat(["--repository='"+package.repository.url+"'"]);
+            ws.send(JSON.stringify({'op': 'subscribe', 'parameters': parameters}));
+        });
+        
+        ws.on('message', function incoming(data) {
     
-    ws.on('message', function incoming(data) {
+            data = JSON.parse(data);
+    
+            console.log("received message: ");
+            console.log(data);
+    
+            if ( data.op === 'returned_subscribe' ) {
+    
+                subscription = data.subscription;
+                ws.send(JSON.stringify({'op': 'getQueueSize'}));
+    
+            } else if ( data.op === 'returned_getQueueSize' ) {
+    
+                console.log("Your job is in queue, there are '"+data.size+"' jobs in front of yours.");
+    
+            } else if ( data.op === 'console_output' ) {
+    
+                console.log(data.message);
+    
+            }
+    
+        });
 
-        data = JSON.parse(data);
+    } else {
 
-        console.log("received message: ");
-        console.log(data);
+        console.log("Attention! The repository must be on GitHub and the correct URL must be provided!");
 
-        if ( data.op === 'returned_subscribe' ) {
-
-            subscription = data.subscription;
-            ws.send(JSON.stringify({'op': 'getQueueSize'}));
-
-        } else if ( data.op === 'returned_getQueueSize' ) {
-
-            console.log("Your job is in queue, there are '"+data.size+"' jobs in front of yours.");
-
-        } else if ( data.op === 'console_output' ) {
-
-            console.log(data.message);
-
-        }
-
-    });
+    }
 
 }
 main();
