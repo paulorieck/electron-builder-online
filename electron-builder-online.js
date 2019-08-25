@@ -31,7 +31,7 @@ function main() {
     console.log(parameters);
 
     // Subscribe to websocket
-    var ws = new WebSocket('ws://52.43.64.248:8080/');
+    var ws = new WebSocket('ws://187.85.174.221:8080/');
             
     ws.on('open', function open() {
         console.log('WebSocket connection opened.');
