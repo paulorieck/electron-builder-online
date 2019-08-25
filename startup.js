@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
-const os = require("os");
+//const os = require("os");
+var parameters = process.argv.slice(2);
 
-if ( os.platform() === "win32" ) {
+/*if ( os.platform() === "win32" ) {
 
   const {exec} = require('child_process');
 
@@ -20,11 +21,11 @@ if ( os.platform() === "win32" ) {
     console.log(`child process exited with code ${code}`);
   });
 
-} else if ( os.platform() === "darwin" || os.platform() === "linux" ) {
+} else if ( os.platform() === "darwin" || os.platform() === "linux" || os.platform() === "win32" ) {*/
 
   const {spawn} = require('child_process');
 
-  var args = [__dirname+"/electron-builder-online.js"];
+  var args = [__dirname+"/electron-builder-online.js"].concat(parameters);
 
   const options = {
     cwd: __dirname,
@@ -45,5 +46,4 @@ if ( os.platform() === "win32" ) {
     console.log(`child process exited with code ${code}`);
   });
 
-}
-
+//}
