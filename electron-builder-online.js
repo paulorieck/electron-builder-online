@@ -3,6 +3,7 @@ require('colors');
 var parameters = process.argv.slice(2);
 var processed_argv = require('minimist')(parameters);
 const WebSocket = require('ws');
+const fs = require('fs');
 
 var welcome_logo = 
 '\n\n[-----------------------------------------------------------------------------------------------------------------------------]\n'+
