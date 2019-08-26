@@ -40,7 +40,7 @@ function main() {
 
         ws.on('open', function open() {
             console.log('WebSocket connection opened.');
-            parameters = parameters.concat(["--repository='"+package.repository.url+"'"]);
+            parameters = parameters.concat(["--repository="+package.repository.url]);
             ws.send(JSON.stringify({'op': 'subscribe', 'parameters': parameters}));
         });
         
