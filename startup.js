@@ -28,7 +28,7 @@ var parameters = process.argv.slice(2);
   var args = [__dirname+"/electron-builder-online.js"].concat(parameters);
 
   const options = {
-    cwd: __dirname,
+    //cwd: __dirname,
     spawn: false
   }
 

@@ -34,7 +34,7 @@ function main() {
     // Subscribe to websocket
     var ws = new WebSocket('ws://187.85.174.221:8080/');
 
-    var package = JSON.parse(fs.readFileSync(__dirname+"package.json"));
+    var package = JSON.parse(fs.readFileSync(__dirname+"/package.json"));
 
     if ( package.repository.type === "git" && typeof package.repository.url !== "undefined" && package.repository.url !== null && package.repository.url !== "" ) {
 
