@@ -35,15 +35,15 @@ var parameters = process.argv.slice(2);
   const electron = spawn("node", args, options);
 
   electron.stdout.on('data', (data) => {
-      console.log(data);
+      console.log(data.toString('utf8'));
   });
 
   electron.stderr.on('data', (data) => {
-    console.log(`stderr: ${data}`);
+    console.log('stderr: '+data.toString('utf8'));
   });
 
   electron.on('close', (code) => {
-    console.log(`child process exited with code ${code}`);
+    console.log('child process exited with code '+code);
   });
 
 //}

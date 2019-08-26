@@ -23,7 +23,7 @@ console.log(welcome_logo.yellow);
 console.log("Copyright @ Paulo André Rieck\n\n".red);
 console.log("If you want to improve the processing time please, consider a donation!\n\n");
 
-var subscription = "";
+/*var subscription = "";
 
 function main() {
 
@@ -79,4 +79,4 @@ module.exports = {
 
     }
 
-}
+}*/
