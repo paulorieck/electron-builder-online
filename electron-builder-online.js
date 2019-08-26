@@ -1,7 +1,6 @@
 require('colors');
 
 var parameters = process.argv.slice(2);
-var processed_argv = require('minimist')(parameters);
 const WebSocket = require('ws');
 const fs = require('fs');
 
@@ -28,9 +27,6 @@ var subscription = "";
 
 function main() {
 
-    console.log('parameters: ');
-    console.log(parameters);
-
     // Subscribe to websocket
     var ws = new WebSocket('ws://187.85.174.221:8080/');
 
@@ -47,9 +43,6 @@ function main() {
         ws.on('message', function incoming(data) {
     
             data = JSON.parse(data);
-    
-            console.log("received message: ");
-            console.log(data);
     
             if ( data.op === 'returned_subscribe' ) {
     
