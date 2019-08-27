@@ -17,7 +17,7 @@ if ( fs.existsSync(path.join(os.homedir(), '.electron-builder-online', 'configs.
 
 } else {
 
-    confs = {"linux_address": "localhost:8005", "win_address": "localhost:8006", "mac_address": "localhost:8007"};
+    confs = {"server_address": "187.85.174.221:8080"};
 
 }
 fs.writeFileSync(path.join(os.homedir(), '.electron-builder-online', 'configs.json'), JSON.stringify(confs));
