@@ -57,7 +57,7 @@ function main() {
     
                 console.log(data.message);
 
-                if ( data.message === "Congratulations! Your job has completed!" ) {
+                if ( data.message.indexOf("Congratulations! Your job has completed!") !== -1 ) {
                     ws.close();
                 }
     
