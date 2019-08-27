@@ -4,6 +4,22 @@ var parameters = process.argv.slice(2);
 const WebSocket = require('ws');
 const fs = require('fs');
 
+var confs = {};
+if ( fs.existsSync(path.join(os.homedir(), '.electron-builder-online', 'configs.json')) ) {
+
+    confs = JSON.parse(fs.readFileSync(path.join(os.homedir(), '.electron-builder-online', 'configs.json')));
+
+    if ( typeof confs.server_address === "undefined" ) {
+        confs.server_address = "187.85.174.221:8080";
+    }
+
+} else {
+
+    confs = {"linux_address": "localhost:8005", "win_address": "localhost:8006", "mac_address": "localhost:8007"};
+
+}
+fs.writeFileSync(path.join(os.homedir(), '.electron-builder-online', 'configs.json'), JSON.stringify(confs));
+
 var welcome_logo = 
 '\n\n[-----------------------------------------------------------------------------------------------------------------------------]\n'+
 '[                                                                                                                             ]\n'+
@@ -28,7 +44,7 @@ var subscription = "";
 function main() {
 
     // Subscribe to websocket
-    var ws = new WebSocket('ws://187.85.174.221:8080/');
+    var ws = new WebSocket('ws://'+confs.server_address+'/');
 
     var package = JSON.parse(fs.readFileSync("package.json"));
 
