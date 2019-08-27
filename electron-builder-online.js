@@ -3,6 +3,7 @@ require('colors');
 var parameters = process.argv.slice(2);
 const WebSocket = require('ws');
 const fs = require('fs');
+const path = require('path');
 
 var confs = {};
 if ( fs.existsSync(path.join(os.homedir(), '.electron-builder-online', 'configs.json')) ) {
