@@ -56,6 +56,10 @@ function main() {
             } else if ( data.op === 'console_output' ) {
     
                 console.log(data.message);
+
+                if ( data.message === "Congratulations! Your job has completed!" ) {
+                    ws.close();
+                }
     
             }
     
