@@ -4,6 +4,7 @@ var parameters = process.argv.slice(2);
 const WebSocket = require('ws');
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
 var confs = {};
 if ( fs.existsSync(path.join(os.homedir(), '.electron-builder-online', 'configs.json')) ) {
