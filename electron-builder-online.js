@@ -75,7 +75,7 @@ function main() {
     
                 console.log(data.message);
 
-                if ( data.message.indexOf("Congratulations! Your job has completed!") !== -1 ) {
+                if ( typeof data.message !== "undefined" && data.message.indexOf("Congratulations! Your job has completed!") !== -1 ) {
                     ws.close();
                 }
     
