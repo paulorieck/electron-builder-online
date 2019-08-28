@@ -76,6 +76,8 @@ function main() {
     
                 if ( data.message !== "" ) {
 
+                    data.message = data.message.replace(/(\r\n|\n|\r)/gm,"");
+
                     if ( data.os === 'darwin' ) {
                         console.log(data.message.red);
                     } else if ( data.os === 'linux' ) {
