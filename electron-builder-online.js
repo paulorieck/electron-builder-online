@@ -5,6 +5,7 @@ const WebSocket = require('ws');
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+require('colors');
 
 var confs = {};
 if ( fs.existsSync(path.join(os.homedir(), '.electron-builder-online', 'configs.json')) ) {
@@ -73,7 +74,19 @@ function main() {
     
             } else if ( data.op === 'console_output' ) {
     
-                console.log(data.message);
+                if ( data.message !== "" ) {
+
+                    if ( data.os === 'darwin' ) {
+                        console.log(data.message.red);
+                    } else if ( data.os === 'linux' ) {
+                        console.log(data.message.yellow);
+                    } else if ( data.os === 'win32' ) {
+                        console.log(data.message.blue);
+                    } else {
+                        console.log(data.message);
+                    }
+
+                }
 
                 if ( typeof data.message !== "undefined" && data.message.indexOf("Congratulations! Your job has completed!") !== -1 ) {
                     ws.close();
